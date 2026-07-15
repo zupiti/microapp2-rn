@@ -2,9 +2,35 @@
 
 Feature module React Native consumido pelo `microapp-main-app-rn`.
 
+## Arquitetura interna
+
+Camadas obrigatórias (fluxo unidirecional):
+
+```text
+entities → services → repositories → hooks → ui/screens → ui/components
+```
+
+```text
+src/
+├── entities/       # Metrica
+├── services/       # MetricasService (mock)
+├── repositories/   # MetricasRepository
+├── hooks/          # useMetricasLista
+├── utils/
+├── ui/
+│   ├── screens/    # Microapp2Screen
+│   ├── components/
+│   └── styles/
+└── index.tsx
+```
+
+**Hooks:** uma responsabilidade; só repository; screens sem `useEffect` de dados. Fronteiras no `.eslintrc.js`.
+
+Detalhes canônicos: `microapp-main-app-rn/rules-project/rules.md` e `IMPLEMENTACAO.md` §6.2.1.
+
 ## O Que Exporta
 
-- `Microapp2Screen`: tela com tabela de metricas.
+- `Microapp2Screen`: tabela de métricas (via hook + repository).
 - Usa `microfront1-rn` e `shared-rn`.
 
 ## Uso Pelo Main App
